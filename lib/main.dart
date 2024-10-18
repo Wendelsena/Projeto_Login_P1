@@ -100,19 +100,23 @@ class _LoginPageState extends State<LoginPage> {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Home'),
+return Scaffold(
+  appBar: AppBar(
+    title: Text('Login'),
+  ),
+  body: Container(
+    color: Colors.blueGrey[50], // Cor de fundo estática
+    padding: const EdgeInsets.all(16.0),
+    child: const Form(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // Formulário como antes
+        ],
       ),
-      body: Center(
-        child: Text('Bem-vindo!', style: TextStyle(fontSize: 24)),
-      ),
-    );
+    ),
+  ),
+);
+
   }
 }
