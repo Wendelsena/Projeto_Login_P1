@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_login_p1/home.dart'; 
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: LoginPage(), 
     );
   }
 }
@@ -28,10 +29,17 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               TextFormField(
                 controller: _usernameController,
-                decoration: InputDecoration(labelText: 'Usuário'),
+                decoration: const InputDecoration(labelText: 'Usuário'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, preencha o campo de usuário';
@@ -52,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Senha'),
+                decoration: const InputDecoration(labelText: 'Senha'),
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -63,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -72,20 +80,22 @@ class _LoginPageState extends State<LoginPage> {
                       if (_formKey.currentState!.validate()) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(), 
+                          ),
                         );
                         _usernameController.clear();
                         _passwordController.clear();
                       }
                     },
-                    child: Text('Login'),
+                    child: const Text('Login'),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       _usernameController.clear();
                       _passwordController.clear();
                     },
-                    child: Text('Limpar'),
+                    child: const Text('Limpar'),
                   ),
                 ],
               ),
@@ -94,29 +104,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-return Scaffold(
-  appBar: AppBar(
-    title: Text('Login'),
-  ),
-  body: Container(
-    color: Colors.blueGrey[50], // Cor de fundo estática
-    padding: const EdgeInsets.all(16.0),
-    child: const Form(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // Formulário como antes
-        ],
-      ),
-    ),
-  ),
-);
-
   }
 }
